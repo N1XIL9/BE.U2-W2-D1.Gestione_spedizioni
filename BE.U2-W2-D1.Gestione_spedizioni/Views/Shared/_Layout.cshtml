@@ -17,28 +17,29 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+                <img src="~/Img/Immagine_2023-01-10_180551-removebg-preview.png" width="100" />
                 @Html.ActionLink("TrackingPack", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Privati", "Privati", "Gestione")</li>
-                    <li>@Html.ActionLink("Aziende", "Aziende", "Gestione")</li>
-
-
-                </ul>
+            <div class="navbar-collapse collapse ">
+                
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Privati", "Privati", "Gestione")</li>
+                        <li>@Html.ActionLink("Aziende", "Aziende", "Gestione")</li>
+                        <li>@Html.ActionLink("Spedizioni", "Spedizioni", "Gestione")</li>
+                    </ul>
+                
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <div class=" container-fluid">
-            <footer>
-                <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET by Nicola Lerra</p>
-            </footer>
-
-
-        </div>
+    <div class="container body-content" >
+        @RenderBody()    
+        
+    </div>
+   
+        <footer >
+            <p>&copy; @DateTime.Now.Year - Applicazione ASP.NET by Nicola Lerra</p>
+        </footer>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

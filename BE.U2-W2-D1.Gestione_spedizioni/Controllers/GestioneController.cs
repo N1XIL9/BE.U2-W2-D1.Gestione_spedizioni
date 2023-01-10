@@ -75,32 +75,37 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
 
         public ActionResult Spedizioni()
         {
-            List<Clienti> listaClienti = new List<Clienti>();
+            List<Spedizioni> listaSpedizioni = new List<Spedizioni>();
 
             SqlConnection sql = Connessioni.GetConnection();
             sql.Open();
 
-            SqlCommand com = Connessioni.GetCommand("SELECT * FROM CLIENTI WHERE TipoCliente = 'Azienda' ", sql);
+            SqlCommand com = Connessioni.GetCommand("SELECT * FROM SPEDIZIONE INNER JOIN" +
+                " CLIENTI ON SPEDIZIONE.IdCliente = CLIENTI.IdCliente " +
+                "INNER JOIN AGGIORNAMENTO ON SPEDIZIONE.IdSpedizione = AGGIORNAMENTO.IdSpedizione", sql);
             SqlDataReader reader = com.ExecuteReader();
 
             while (reader.Read())
             {
-                Clienti c = new Clienti();
+                Spedizioni s = new Spedizioni();
 
-
-                c.IdCliente = Convert.ToInt32(reader["IdCliente"]);
-                c.RagioneSociale = reader["RagioneSociale"].ToString();
-                c.PIVA = reader["P_IVA"].ToString();
-                c.Indirizzo = reader["Residenza_SedeLegale"].ToString();
-                c.Telefono = reader["Telefono"].ToString();
-                c.Email = reader["email"].ToString();
-                listaClienti.Add(c);
+                s.Mittente = reader["Cognome"].ToString() + reader["Nome"].ToString();
+                s.IdSpedizione = Convert.ToInt32(reader["IdSpedizione"]);
+                s.DataSpedizione = Convert.ToDateTime(reader["Data_Spedizione"]);
+                s.Peso = reader["Peso"].ToString();
+                s.Destinatario = reader["Destinatario"].ToString();
+                s.IndirizzoDestinatario = reader["Ind_Destinatario"].ToString();
+                s.CittaDestinatario = reader["Citta_Destinatario"].ToString();
+                s.CostiSpedizione = reader["Costo_Spedizione"].ToString();
+                s.DataConsegna = Convert.ToDateTime(reader["Data_Consegna"]);
+                
+                listaSpedizioni.Add(s);
 
 
             }
             sql.Close();
 
-            return View(listaClienti);
+            return View(listaSpedizioni);
         }
     }
 }

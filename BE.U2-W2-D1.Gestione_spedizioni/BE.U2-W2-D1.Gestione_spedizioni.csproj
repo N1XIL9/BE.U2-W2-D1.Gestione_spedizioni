@@ -127,6 +127,7 @@
     </Compile>
     <Compile Include="Models\Clienti.cs" />
     <Compile Include="Models\Connessioni.cs" />
+    <Compile Include="Models\Spedizioni.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Img\ecommerce-shipping-globe-trade-map-worldwide-1450089-pxhere.com.jpg" />
+    <Content Include="Img\Immagine_2023-01-10_180551-removebg-preview.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -165,6 +168,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Gestione\Privati.cshtml" />
     <Content Include="Views\Gestione\Aziende.cshtml" />
+    <Content Include="Views\Gestione\Spedizioni.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
