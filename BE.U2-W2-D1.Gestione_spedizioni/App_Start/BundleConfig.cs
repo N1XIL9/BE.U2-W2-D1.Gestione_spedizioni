@@ -24,7 +24,7 @@ namespace BE.U2_W2_D1.Gestione_spedizioni
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/Site.css"));
         }
     }
 }
