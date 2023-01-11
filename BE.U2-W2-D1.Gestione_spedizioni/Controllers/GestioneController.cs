@@ -9,9 +9,12 @@ using System.Web.UI.WebControls.WebParts;
 
 namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
 {
+    [Authorize]
     public class GestioneController : Controller
     {
+
         // GET: Gestione
+       
         public ActionResult Privati()
         {
             List<Clienti> listaClienti = new List<Clienti>();

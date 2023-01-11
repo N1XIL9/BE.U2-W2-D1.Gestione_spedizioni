@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
 {
@@ -20,11 +21,12 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login([Bind(Exclude ="Ruolo")] UserLog u)
+        public ActionResult Login( UserLog u)
         {
             if (UserLog.Autenticato(u.Username, u.Password))
             {
-
+                FormsAuthentication.SetAuthCookie(u.Username, false);
+                return Redirect(FormsAuthentication.DefaultUrl);
             }
             return View();
         }

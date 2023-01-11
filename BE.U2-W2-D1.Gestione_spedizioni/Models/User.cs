@@ -15,7 +15,6 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Models
         [Required]
         public string Password { get; set; }
 
-        public string Ruolo { get; set; }
         public static bool Autenticato(string username, string password)
         {
             SqlConnection con = Connessioni.GetConnection();
