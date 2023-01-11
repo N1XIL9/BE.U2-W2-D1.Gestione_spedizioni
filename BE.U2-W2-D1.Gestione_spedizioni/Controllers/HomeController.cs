@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BE.U2_W2_D1.Gestione_spedizioni.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,8 +17,19 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
         public ActionResult Login()
         {
             return View();
-        }   
+        }
 
-      
+        [HttpPost]
+        public ActionResult Login([Bind(Exclude ="Ruolo")] UserLog u)
+        {
+            if (UserLog.Autenticato(u.Username, u.Password))
+            {
+
+            }
+            return View();
+        }
+
+
+
     }
 }

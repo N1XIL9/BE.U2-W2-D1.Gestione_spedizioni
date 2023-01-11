@@ -81,15 +81,14 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
             sql.Open();
 
             SqlCommand com = Connessioni.GetCommand("SELECT * FROM SPEDIZIONE INNER JOIN" +
-                " CLIENTI ON SPEDIZIONE.IdCliente = CLIENTI.IdCliente " +
-                "INNER JOIN AGGIORNAMENTO ON SPEDIZIONE.IdSpedizione = AGGIORNAMENTO.IdSpedizione", sql);
+                " CLIENTI ON SPEDIZIONE.IdCliente = CLIENTI.IdCliente ", sql);
             SqlDataReader reader = com.ExecuteReader();
 
             while (reader.Read())
             {
                 Spedizioni s = new Spedizioni();
 
-                s.Mittente = reader["Cognome"].ToString() + reader["Nome"].ToString();
+                s.Mittente = reader["Cognome"].ToString() + "" + reader["Nome"].ToString();
                 s.IdSpedizione = Convert.ToInt32(reader["IdSpedizione"]);
                 s.DataSpedizione = Convert.ToDateTime(reader["Data_Spedizione"]);
                 s.Peso = reader["Peso"].ToString();
@@ -103,8 +102,26 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
 
 
             }
+
+            reader.Close();
             sql.Close();
 
+            SqlConnection con = Connessioni.GetConnection();
+            con.Open();
+
+            foreach (Spedizioni item in listaSpedizioni)
+            {
+                SqlCommand cnct = Connessioni.GetCommand(" SELECT TOP(1) * FROM AGGIORNAMENTO INNER JOIN STATO_SPEDIZIONE ON STATO_SPEDIZIONE.IdStato = Aggiornamento.IdStato WHERE IdSpedizione = @IdSpedizione order by DataAggiornamento Desc", con);
+                cnct.Parameters.AddWithValue("IdSpedizione", item.IdSpedizione);
+
+               SqlDataReader red = cnct.ExecuteReader();
+
+                while (red.Read())
+                {
+                    item.Aggiornamento = red["Stato"].ToString() ;
+                }
+            }
+            con.Close();
             return View(listaSpedizioni);
         }
     }

@@ -128,6 +128,7 @@
     <Compile Include="Models\Clienti.cs" />
     <Compile Include="Models\Connessioni.cs" />
     <Compile Include="Models\Spedizioni.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +169,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Gestione\Privati.cshtml" />
     <Content Include="Views\Gestione\Aziende.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Gestione\Spedizioni.cshtml" />
   </ItemGroup>
   <ItemGroup>
