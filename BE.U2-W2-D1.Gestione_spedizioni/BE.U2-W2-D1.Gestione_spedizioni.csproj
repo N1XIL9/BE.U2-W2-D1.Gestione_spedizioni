@@ -171,6 +171,7 @@
     <Content Include="Views\Gestione\Aziende.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Gestione\Spedizioni.cshtml" />
+    <Content Include="Views\Gestione\ModificaCliente.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

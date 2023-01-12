@@ -127,5 +127,74 @@ namespace BE.U2_W2_D1.Gestione_spedizioni.Controllers
             con.Close();
             return View(listaSpedizioni);
         }
+
+        //MODIFICARE - SELECT
+        public ActionResult ModificaCliente(int id)
+        {
+            SqlConnection sql = Connessioni.GetConnection();
+            sql.Open();
+
+            SqlCommand com = Connessioni.GetCommand("SELECT * from CLIENTI where IdCliente = @IdCliente", sql);
+            com.Parameters.AddWithValue("IdCliente", id);
+            SqlDataReader reader = com.ExecuteReader();
+
+            Clienti c = new Clienti();
+
+            while (reader.Read())
+            {
+                c.IdCliente = Convert.ToInt32(reader["IdCliente"]);
+                c.Cognome = reader["Cognome"].ToString();
+                c.Nome = reader["Nome"].ToString();
+                c.CF = reader["CodiceFiscale"].ToString();
+                c.Indirizzo = reader["Residenza_SedeLegale"].ToString();
+                c.Telefono = reader["Telefono"].ToString();
+                c.Email = reader["email"].ToString();
+
+            }
+            sql.Close();
+            return View(c);
+        }
+        
+        [HttpPost]
+        public ActionResult ModificaCliente(Clienti custom)
+        {
+            SqlConnection sql = Connessioni.GetConnection();
+            sql.Open();
+
+            try
+            {
+
+                SqlCommand com = Connessioni.GetCommand("UPDATE CLIENTI set Cognome=@Cognome, Nome=@Nome, CodiceFiscale=@CodiceFiscale, Residenza_SedeLegale=@Indirizzo," +
+                    " Telefono=@Telefono, email=@email where IdCliente = @IdCliente", sql);
+
+                com.Parameters.AddWithValue("IdCliente", custom.IdCliente);
+                com.Parameters.AddWithValue("Cognome", custom.Cognome);
+                com.Parameters.AddWithValue("Nome", custom.Nome);
+                com.Parameters.AddWithValue("CodiceFiscale", custom.CF);
+                com.Parameters.AddWithValue("Indirizzo", custom.Indirizzo);
+                com.Parameters.AddWithValue("Telefono", custom.Telefono);
+                com.Parameters.AddWithValue("email", custom.Email);
+
+                int row = com.ExecuteNonQuery();
+
+                if (row > 0)
+                {
+                    ViewBag.confirm = "Scheda cliente modificata con successo";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                ViewBag.errore = ex.Message;
+            }
+            finally { sql.Close(); }
+
+            return RedirectToAction("Privati");
+        }
+
+        public ActionResult CreatePrivate()
+        {
+            return View();
+        }
     }
 }
